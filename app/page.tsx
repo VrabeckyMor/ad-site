@@ -1,16 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Nav } from './nav';
 
 export default function Home() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 0.5;
+    }
+  }, []);
 
   return (
     <div>
       <Nav />
       <div className="h-16"></div>
-      <video src="/bg.mp4" autoPlay loop muted className="fixed top-0 left-0 w-full h-full z-0 object-cover" />
+      <video src="/bg.mp4" ref={videoRef} autoPlay loop muted className="fixed top-0 left-0 w-full h-full z-0 object-cover" />
       <main className="relative flex flex-col items-center z-10">
 
         <section id="home" className="flex flex-col items-center py-5 w-[60%] scroll-mt-16">
